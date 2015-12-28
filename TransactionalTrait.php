@@ -44,7 +44,7 @@ trait TransactionalTrait
     /**
      * Откатить транзакцию после каждого теста
      */
-    public function endTransaction()
+    public function rollBackTransaction()
     {
         $this->transaction->rollBack();
         $this->transaction = null;
