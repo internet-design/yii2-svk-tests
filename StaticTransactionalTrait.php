@@ -12,7 +12,7 @@ use yii\db\Transaction;
  * Подключение к БД берется из метода getDb.
  * По умолчанию - подключение из Yii::$app->db.
  */
-trait StaticTransaction
+trait StaticTransactionalTrait
 {
     /**
      * @var Transaction транзакция
@@ -24,26 +24,27 @@ trait StaticTransaction
      *
      * @return Connection
      */
-    protected static function getDb()
+    protected static function getStaticDb()
     {
         return Yii::$app->db;
     }
 
     /**
-     * Действия перед запуском всех тестов
+     * Запуск статической транзакции
      */
-    public static function setUpBeforeClass()
+    public static function beginStaticTransaction()
     {
-        static::$staticTransaction = static::getDb()->beginTransaction();
-        parent::setUpBeforeClass();
+        if (!self::$staticTransaction) {
+            static::$staticTransaction = static::getDb()->beginTransaction();
+        }
     }
 
     /**
-     * Действия после запуска всех тестов
+     * Откат статической транзакции
      */
-    public static function tearDownAfterClass()
+    public static function rollBackStaticTransaction()
     {
-        parent::tearDownAfterClass();
         static::$staticTransaction->rollBack();
+        static::$staticTransaction = null;
     }
 }
