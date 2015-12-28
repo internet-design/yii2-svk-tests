@@ -3,7 +3,7 @@
     "description": "Basic classes to use codeception tests",
     "type": "extension",
     "version": "dev-master",
-    "reference": "f9a47e2851c983f8801a3400e8bc3d4b",
+    "reference": "22334a2ffed0a073b8b7dd00db33f1d7",
     "keywords": [
         "yii2",
         "framework",
