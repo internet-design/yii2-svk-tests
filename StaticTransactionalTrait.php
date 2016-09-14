@@ -34,7 +34,7 @@ trait StaticTransactionalTrait
      */
     public static function beginStaticTransaction()
     {
-        if (!self::$staticTransaction) {
+        if (!static::$staticTransaction) {
             static::$staticTransaction = static::getStaticDb()->beginTransaction();
         }
     }
